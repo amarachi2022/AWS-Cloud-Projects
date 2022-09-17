@@ -1,0 +1,33 @@
+Host a dynamic website on EC2
+S3 can be used to store code to be used by the backend server. To do this, the source code will be uploaded to S3. EC2 will be configured at launch with the script to install server software and with the IAM Role to access S3. Users can then access the dynamic website through the public URL of the EC2 instance. 
+
+Steps 1 
+Create a bucket and upload your source code. Click here for more Insert link
+
+Step 2
+Go to the IAM console, Click on Roles, and Choose AWS Resource type and EC2 as your resource.
+In Permissions, select AWS S3 full access.
+Next, enter the Name of your Role and click Create.
+
+Step 3
+In AWS Management Console, choose an AWS Region to launch your instance. 
+Go to the EC2 console, and click Launch Instance.
+Select Amazon AMI as your machine image. An AMI Image contains the OS and other data of your Instance.
+Choose your Instance type as t2 micro because it's free tier eligible. For production workloads, make use of your preferred type.
+Under Configure Instance Details, Choose a different VPC or leave it as default, Select the IAM Role created earlier.
+In User Data, this script below would update the underlying OS, install Apache Software  and access your S3 bucket
+
+sudo yum update -y
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+sudo yum install -y httpd mariadb-server
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo systemctl is-enabled httpd
+sudo aws s3 cp s3://webprod --region us-east-1 /var/www/html/ --recursive
+
+
+
+Leave Storage settings as default.
+Select an existing security group or default
+Next, Create a new Key for SSH access to your EC2 Instance. Download it and keep it in a safe location.
+Copy the link of EC2 Instance to connect to your website.
