@@ -1,0 +1,47 @@
+CloudFront is a Content Delivery Network Servuce that caches static and dynamic content at edge locations all over the world. It reduces latency by putting contents close to your User.
+
+Steps to Create a Cloud Front Distribution
+Create an IAM Role to give full access to S3 and Session Manager.
+Launch 2 EC2 Instances in different Availability Zones.
+User data below
+
+sudo yum update -y
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+sudo yum install -y httpd mariadb-server
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo systemctl is-enabled httpd
+sudo aws s3 cp s3://webprod --region us-east-1 /var/www/html/ --recursive
+
+Create a new Public Security Group and allow HTTP only from the Load Balancer
+Use existing or new Key Pair.
+
+Create an Application Load Balancer
+Name your Load Balancer and choose 3 Availability Zone.
+Under Security Settings, create a new Security Group, Add a rule to allow HTTP and HTTPS from Cloud Front
+Under Routing Policies, Create a new Target Group. Leave other settings as default.
+Under Health Checks, take two as number of times to check the health of the Load Balancer.
+For the Target Group, choose your two EC2 Instances.
+Then Review and Create.
+
+Search for Cloud Front in AWS Management Console and click on Create a CloudFront Distribution and get Started.
+Under Origin Settings, Put in the Domain Name of the  Load balancer for Origin Name. An Origin can also be an S3 bucket
+For Origin Path, Choose the path of the website to cache all contents of your website or leave as default to cache all pages of your Websites.
+
+The Distribution Settings, Choose the Price class next to you need based on which edge locations are needed for your website. 
+Leave every other settings as defaut and Create CloudFront Distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
