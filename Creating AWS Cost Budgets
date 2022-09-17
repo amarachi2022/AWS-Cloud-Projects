@@ -1,0 +1,30 @@
+AWS Budget is a service that allows you to track and take action on the cost and usage of your resources.
+There are four types of budgets but we will be creating a cost budget.
+
+Steps to Create a Cost Budget
+
+Sign in to the AWS Management Console, search and open the AWS Cost Management.
+
+In Cost Management, Select Budgets then Click on Create budget at the top of the page.
+
+Select Cost budget as type and then choose Next.
+
+Under Period, choose how often you want the budget to count. You can select daily, monthly, etc. I'd be going with Monthly. 
+
+For a Budget effective date, Select Recurring budget if you want a budget that resets after the budget period. Or, select Expiring budget if you want a budget that doesn't reset after the budget period.
+
+Choose a start date for the start of your budget tracking, For an Expiring budget, choose the date when the tracking should end. 
+
+
+The budgeting method determines which budget amount is used for tracking each period. I'd be going with it because I'd used the same budget amount every period.
+
+Under Details, write the name of your budget, it must be a unique name in your account.
+
+Under Alert Threshold, select an amount that must be reached before you're notified. It can be an absolute value or a percentage of your budgeted amount.
+
+Under Notification, input the email address of the recipient of an alert when the threshold is exceeded.
+
+For Actions, you can choose an action that should be taken when the threshold has been exceeded.
+
+Review your budget and create.
+
